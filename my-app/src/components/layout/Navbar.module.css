@@ -1,0 +1,67 @@
+.nav {
+  background: var(--olive);
+  border-bottom: 3px solid var(--terra);
+  position: sticky; top: 0; z-index: 100;
+  height: 58px;
+}
+
+.inner {
+  max-width: 1060px; margin: 0 auto;
+  padding: 0 1.25rem;
+  height: 100%;
+  display: flex; align-items: center; gap: 2rem;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 1.45rem;
+  color: var(--cream); letter-spacing: -0.5px;
+  text-decoration: none; flex-shrink: 0;
+}
+.logo span { color: var(--terra-light); }
+
+.links {
+  display: flex; list-style: none;
+  gap: 1.8rem; margin: 0; padding: 0;
+  margin-right: auto;
+}
+.links a {
+  color: var(--cream); opacity: 0.8;
+  font-size: 0.85rem; font-weight: 500;
+  text-decoration: none; letter-spacing: 0.2px;
+  transition: opacity 0.2s, color 0.2s;
+}
+.links a:hover { opacity: 1; color: var(--gold); }
+
+.actions {
+  display: flex; gap: 0.5rem; align-items: center;
+}
+.actions .btn-outline {
+  padding: 0.42rem 1rem; font-size: 0.82rem;
+}
+.actions .btn-primary {
+  padding: 0.42rem 1rem; font-size: 0.82rem;
+}
+
+.burger {
+  display: none; flex-direction: column;
+  gap: 5px; background: none; border: none;
+  cursor: pointer; padding: 4px; margin-left: auto;
+}
+.burger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--cream); border-radius: 2px;
+  transition: transform 0.2s;
+}
+
+@media (max-width: 680px) {
+  .links {
+    display: none; flex-direction: column;
+    position: absolute; top: 58px; left: 0; right: 0;
+    background: var(--olive); padding: 1rem 1.25rem;
+    gap: 1rem; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .links.open { display: flex; }
+  .actions { display: none; }
+  .burger { display: flex; }
+}
