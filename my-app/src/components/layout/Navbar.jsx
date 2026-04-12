@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 import styles from './Navbar.module.css'
 
 const links = [
@@ -10,13 +12,20 @@ const links = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
 
   return (
     <nav className={styles.nav}>
       <div className={styles.inner}>
-        <a href="/" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           Budget<span>Cooks</span>
-        </a>
+        </Link>
 
         <ul className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
           {links.map(l => (
@@ -27,8 +36,21 @@ export default function Navbar() {
         </ul>
 
         <div className={styles.actions}>
-          <button className="btn btn-outline">Log in</button>
-          <button className="btn btn-primary">Sign up</button>
+          {user ? (
+            <>
+              <span className={styles.greeting}>
+                👋 <strong>{user.username}</strong>
+              </span>
+              <button className="btn btn-outline" onClick={handleLogout}>
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login"  className="btn btn-outline">Log in</Link>
+              <Link to="/signup" className="btn btn-primary">Sign up</Link>
+            </>
+          )}
         </div>
 
         <button
